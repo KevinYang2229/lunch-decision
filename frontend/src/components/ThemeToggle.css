@@ -1,0 +1,84 @@
+.theme-toggle {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(5deg);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px; /* Fixed gap */
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* 
+   Container layout: [Sun 24px] [Gap 24px] [Moon 24px]
+   Total height: 72px. Center point: 36px (middle of gap)
+   Offset to center Sun: 36 - 12 = 24px
+   Offset to center Moon: 36 - (24+24+12) = -24px
+*/
+.theme-toggle.light .icon-container {
+  transform: translateY(-24px); /* Show Moon */
+}
+
+.theme-toggle.dark .icon-container {
+  transform: translateY(24px); /* Show Sun */
+}
+
+.theme-toggle span {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  user-select: none;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+}
+
+/* Theme specific backgrounds for the toggle */
+.theme-toggle.light {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    inset 0 0 10px rgba(0, 0, 0, 0.02);
+}
+
+.theme-toggle.dark {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.4),
+    inset 0 0 15px rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 640px) {
+  .theme-toggle {
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+  }
+  .theme-toggle span {
+    font-size: 1.25rem;
+  }
+}
